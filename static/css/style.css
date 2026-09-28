@@ -1,0 +1,52 @@
+
+/* Estilos generales */
+.tittleColor {
+    color: #177a55;
+}
+body {
+    background-color: #f4f4f4;
+}
+/* Estilos para los encabezados */
+h1, h2, h3 {
+    color: #141313;
+}
+/* Estilos para las tarjetas de los posts */
+.card {
+    border-radius: 12px;
+}
+
+.authorColor {
+    color: #004ba7;
+}
+/* Estilos para las imágenes que se creadon en post el tamano */
+img {
+    border-radius: 10px;
+}
+.bodyColor {
+    color: #404040;
+}
+
+.titulo-principal {
+    color: #4CAF50; 
+    font-weight: bold;
+}
+
+/* Estilos para la imagen principal */
+.imagen-principal {
+    max-width: 400px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.2);
+}
+
+
+.texto-bienvenida {
+    font-size: 18px;
+    color: #555;
+}
+
+
+
+.fondito {
+    background-color: white;
+}
+    

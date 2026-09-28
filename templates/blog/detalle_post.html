@@ -1,0 +1,76 @@
+{% extends "base.html" %}
+
+<!-- Detalle del post -->
+<!-- contenido guardado-->
+{% block content %}
+<!--tarjeta que uestra los cortenido del post-->
+<div class="card shadow-sm p-4">
+    <!--inicio de sesion de post-->
+    <!--titulo del post asignado por le usuario-->
+    <h2 class="fw-bold">{{ post.titulo }}</h2>
+    <!--fecha de publicacion del post asignado por el usuario y nombre dle usuario creado-->
+    <p class="text-muted">
+        Publicado el {{ post.fecha_publicacion|date:"d/m/Y H:i" }}
+        — por <strong>{{ post.autor.username }}</strong>
+    </p>
+    <!--imagen del post asignado por el usuario-->
+    {% if post.imagen %}
+        <img src="{{ post.imagen.url }}" class="img-fluid mb-3 rounded shadow" alt="">
+    {% endif %}
+    <!--contenido del post asignado por el usuario-->
+    <p class="fs-5">{{ post.contenido }}</p>
+
+    <hr>
+    <!--categoria del post asignado por el usuario-->
+    <p><strong>Categoría:</strong> {{ post.categoria|default:"Sin categoría" }}</p>
+    <!--visializacion del post-->
+    <p><strong>Vistas:</strong> {{ post.vistas }}</p>
+    <!--fin del inicio de sesion de post-->
+
+
+    {% if user == post.autor %}
+        <a href="{% url 'editar_post' post.slug %}" class="btn btn-primary">Editar</a>
+        <a href="{% url 'eliminar_post' post.slug %}" class="btn btn-danger">Eliminar</a>
+    {% endif %}
+
+    <a href="{% url 'lista_posts' %}" class="btn btn-secondary mt-3">Volver</a>
+
+</div>
+<!--  seccionComentarios -->
+<div class="card shadow-sm p-4 mt-5">
+    <h4 class="fw-bold mb-3">Comentarios</h4>
+
+    {% for comentario in comentarios %}
+        <div class="border rounded p-3 mb-3">
+            <strong>
+                <!-- Autor del comentario -->
+                {% if comentario.autor_usuario %}
+                    {{ comentario.autor_usuario.username }}
+                {% else %}
+                    {{ comentario.autor_nombre }}
+                {% endif %}
+            </strong>
+            <!-- Texto del comentario quien lo escribda -->
+            <p class="mb-1">{{ comentario.texto }}</p>
+            <!--fecha del comentairo creado-->
+            <small class="text-muted">{{ comentario.fecha|date:"d/m/Y H:i" }}</small>
+        </div>
+        <!-- empety agregara no hay coemntario cuando ni un usuario lo creo cuando agregue desaprece-->
+    {% empty %}
+        <p class="text-muted">No hay comentarios todavía.</p>
+    {% endfor %}
+    <hr class="my-4">
+    <!-- Formulario para agregar un comentario -->
+    <h4 class="fw-bold">Agregar un comentario</h4>
+
+    <form method="post" class="mt-3">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-primary">Enviar comentario</button>
+    </form>
+
+    <!--fin sesccion comentairo-->
+
+</div>
+{% endblock %}
+

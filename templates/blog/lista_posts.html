@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+<!--edicion del post-->
+{% block content %}
+<div class="container">
+
+    <h2 class="mb-4 fw-bold">Publicaciones del Blog</h2>
+    {% if user.is_authenticated %}
+    <a href="{% url 'crear_post' %}" class="btn btn-success mb-3">Crear nueva publicación</a>
+    {% endif %}
+    <!--zona de edicion del post-->
+    <div class="list-group shadow-sm">
+        <!--creaccion de enlace de cada post-->
+        {% for post in posts %}
+            <a href="{% url 'detalle_post' post.slug %}" class="list-group-item list-group-item-action py-4">
+                <h5 class="mb-1 fw-bold">{{ post.titulo }}</h5>
+                <!--exotraccion de post si existe en el registro-->
+                {% if post.extracto %}
+                    <p class="mb-1 text-muted">{{ post.extracto }}</p>
+                {% endif %}
+
+                <small class="texto-secundario">
+                    Publicado el {{ post.fecha_publicacion|date:"d/m/Y" }}
+                    — por {{ post.autor.username }}
+                </small>
+            </a>
+        {% empty %}
+        <!--lugar si no hay publicaciones disponibles en la base de dato registrada-->
+            <p>No hay publicaciones disponibles.</p>
+        {% endfor %}
+    </div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,17 @@
+{% extends "base.html" %}
+{% block title %}Crear Post{% endblock %}
+
+<!-- formulario para crear post-->
+{% block content %}
+<h2 class="fw-bold mb-4">
+    {% if editar %}Editar publicación{% else %}Nueva publicación{% endif %}
+</h2>
+<div class="card p-4 shadow-sm">
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{ form.as_p }}
+        <button class="btn btn-success">Guardar</button>
+        <a href="{% url 'lista_posts' %}" class="btn btn-secondary">Cancelar</a>
+    </form>
+</div>
+{% endblock %}

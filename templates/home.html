@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+{% load static %}
+
+{% block content %}
+<!-- Sección principal -->
+<section class="text-center py-5 seccion-principal">
+    <h2 class="mb-3">Bienvenido {{ user.username }}</h2>
+    <h1 class="titulo-principal"> Sitio Principal </h1>
+    <hr class="my-4 w-25 mx-auto">
+    <p class="mt-4 texto-bienvenida">
+        sitio principal home
+    </p>
+</section>
+
+
+
+<!-- sesion secuandaria -->
+<div class="seccion-secundaria py-5 mt-5 text-center">
+    <h2>Información secundaria</h2>
+    <h3>no hay</h3>
+
+    
+    <p class="mt-3 texto-secundario">
+        Esta es una sección secundaria para información adicional
+    </p>
+</div>
+{% endblock content %}
